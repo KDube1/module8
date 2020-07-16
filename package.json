@@ -5,8 +5,8 @@
   "description": "",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html --public-url '.'",
-    "predeploy": "rm -rf dist && parcel build index.html --public-url '.'",
+    "build": "parcel build index.html --public-url 'https://kdube1.github.io/module8/'",
+    "predeploy": "rm -rf dist && parcel build index.html --public-url 'https://kdube1.github.io/module8/'",
     "deploy": "gh-pages -d dist"
   },
   "license": "MIT",

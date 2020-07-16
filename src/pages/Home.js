@@ -33,14 +33,18 @@ function Home() {
 
         <Fragment>
             <NavBar budget={teamData.budget} language={language} setLanguage={language}/>
-            <Typography variant="h1" color="textPrimary" align="center" gutterBottom>
+            <Typography variant="h1" color="error" align="center" gutterBottom>
+                MYSUPERTEAM
+            </Typography>
+            <br/>
+            <Typography variant="h2" color="textPrimary" align="center" gutterBottom>
                 {language === "english" ? "Build Your NBA Super Team." : "Constituez votre super équipe NBA."}
             </Typography>
 
             <CardMedia
                 component="iframe"
                 height="580"
-                image="https://www.youtube.com/embed/-LOluO9wJPc"
+                image="https://www.youtube.com/embed/1LJdYg5JOto"
                 title="Video"/>
 
             <br/>

@@ -81,6 +81,8 @@ function Players() {
     "love", "jokic", "embiid", "bam"];
 
     const [alert, toggleAlert] = useState(false);
+    const [selectedtoast, toggleSelectedToast] = useState(false);
+    const [removedtoast, toggleRemovedToast] = useState(false);
 
 
     function togglePlayer(playerName) {
@@ -92,6 +94,7 @@ function Players() {
                 playerData[playerName].selected = !playerData[playerName].selected;
                 const index = playerNames.indexOf(playerName);
                 selectedArray[index](true);
+                toggleSelectedToast(true);
             } else {
                 toggleAlert(true);
                 const index = playerNames.indexOf(playerName);
@@ -104,6 +107,7 @@ function Players() {
             playerData[playerName].selected = !playerData[playerName].selected;
             const index = playerNames.indexOf(playerName);
             selectedArray[index](false);
+            toggleRemovedToast(true);
 
         }
     }
@@ -113,6 +117,8 @@ function Players() {
             return;
         }
         toggleAlert(false);
+        toggleSelectedToast(false);
+        toggleRemovedToast(false);
     }
 
     return (
@@ -120,9 +126,21 @@ function Players() {
         <Fragment>
 
             <NavBar budget={budget} language={language} setLanguage={setLanguage}/>
-            <Snackbar open={alert} autoHideDuration={6000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity="error">
+            <Snackbar open={alert} autoHideDuration={1200} onClose={handleClose}>
+                <Alert  variant={"filled"} onClose={handleClose} severity="error">
                     Error! Over Budget!
+                </Alert>
+            </Snackbar>
+
+            <Snackbar open={selectedtoast} autoHideDuration={1200} onClose={handleClose}>
+                <Alert variant={"filled"} onClose={handleClose} severity="success">
+                    Player Added!
+                </Alert>
+            </Snackbar>
+
+            <Snackbar open={removedtoast} autoHideDuration={1200} onClose={handleClose}>
+                <Alert variant={"filled"} onClose={handleClose} severity="info">
+                    Player Removed!
                 </Alert>
             </Snackbar>
             <br/>

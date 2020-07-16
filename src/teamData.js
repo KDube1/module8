@@ -1,5 +1,5 @@
 export  let teamData ={
-    "budget": 150,
+    "budget": 120,
   
   };
 
