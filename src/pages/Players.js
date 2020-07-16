@@ -119,7 +119,7 @@ function Players() {
 
         <Fragment>
 
-            <NavBar budget={budget}/>
+            <NavBar budget={budget} language={language} setLanguage={setLanguage}/>
             <Snackbar open={alert} autoHideDuration={6000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="error">
                     Error! Over Budget!
