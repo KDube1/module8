@@ -1,0 +1,9 @@
+All players images and basketball statistics are from https://www.basketball-reference.com/
+
+MaterialUI API was used throughout the site for almost every jsx element. https://material-ui.com/
+
+Icons are all from the MaterialUI website https://material-ui.com/components/material-icons/
+
+handleClose function based on official API https://material-ui.com/components/alert/
+
+
