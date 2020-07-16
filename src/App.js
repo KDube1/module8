@@ -20,27 +20,35 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormLabel from "@material-ui/core/FormLabel";
 
 
-export function NavBar({budget}) {
+export function NavBar({budget, language, setLanguage}) {
     const history = useHistory();
 
     function changeToPlayer() {
         history.push("/players",
-            {budget: budget}
+            {
+                budget: budget,
+                language: language,
+            }
         )
     }
 
     function changeToHome() {
         history.push("/",
-            {budget: budget}
+            {
+                budget: budget,
+                language: language,
+            }
         )
     }
 
     function changeToTeam() {
         history.push("/team",
-            {budget: budget}
+            {
+                budget: budget,
+                language: language,
+            }
         )
     }
-
 
     return (
 
@@ -51,11 +59,11 @@ export function NavBar({budget}) {
                     <SportsBasketballIcon/>
 
                 </IconButton>
-                <Button onClick={() => changeToHome()}>Home</Button>
+                <Button onClick={() => changeToHome()}>{language === "english" ? "Home" : "Page d'accueil"}</Button>
 
-                <Button onClick={() => changeToPlayer()}>Players</Button>
+                <Button onClick={() => changeToPlayer()}>{language === "english" ? "Players" : "Joueurs"}</Button>
 
-                <Button onClick={() => changeToTeam()}>Team</Button>
+                <Button onClick={() => changeToTeam()}>{language === "english" ? "Team" : "Équipe"}</Button>
 
             </Toolbar>
         </AppBar>
@@ -85,18 +93,25 @@ export function BottomBar({budget, language, setLanguage}) {
 
         <AppBar className={classes.stayOnBottom} color='secondary'>
             <Toolbar>
-                        <Typography variant="subtitle1" align="left">{"Budget: $" + budget.toString()}</Typography>
+                <Grid container>
+                <Typography variant="subtitle1" align="left">{"Budget: $" + budget.toString()}</Typography>
+                </Grid>
 
-                <FormControl component="fieldset">
-                    <RadioGroup row aria-label="language" name="language1" value={language} onChange={changeLanguage}>
-                        <FormControlLabel value={true} control={<Radio color = "default" />} label="English" />
-                        <FormControlLabel value={false}  control={<Radio color = "default"/>} label="French" />
-                    </RadioGroup>
-                </FormControl>
-        </Toolbar>
-</AppBar>
+                <Grid container justify={"flex-end"}>
+                    <FormControl component="fieldset">
+                        <RadioGroup row aria-label="language" name="language1" value={language}
+                                    onChange={changeLanguage}>
+                            <FormControlLabel value={"english"} control={<Radio color="default"/>} label="English"/>
+                            <FormControlLabel value={"french"} control={<Radio color="default"/>} label="Français"/>
+                        </RadioGroup>
+                    </FormControl>
+                </Grid>
+            </Toolbar>
+        </AppBar>
 
-);
+
+    )
+        ;
 }
 
 

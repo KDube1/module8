@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import {playerData, teamData} from "../teamData";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
@@ -27,40 +27,43 @@ function Team() {
     }
 
     const [budget, setBudget] = useState(history.location.state.budget)
+    const [language, setLanguage] = useState(history.location.state.language);
 
     function changeToHome() {
         history.push("/",
-            {budget: budget}
+            {budget: budget,
+            language:language}
         )
     }
 
     function changeToPlayers() {
         history.push("/players",
-            {budget: budget}
+            {budget: budget,
+            language:language}
         )
     }
     return (
         <Fragment>
-            <NavBar budget={budget}/>
-            <Typography variant="h2" color="textSecondary" align="left" gutterBottom> My Team </Typography>
+            <NavBar budget={budget} language={language}/>
+            <Typography variant="h2" color="textSecondary" align="left" gutterBottom> {language ==="english"?"My Team":"Mon équipe"} </Typography>
             <Grid container spacing={3}>
-                <DisplayPlayers/>
+                <DisplayPlayers language={language} setLanguage ={setLanguage}/>
             </Grid>
             <br/>
 
 
-            <Typography variant="h2" color="textSecondary" align="left" gutterBottom> Totals </Typography>
+            <Typography variant="h2" color="textSecondary" align="left" gutterBottom> {language ==="english"?"Totals":"Totaux"} </Typography>
             <Grid container spacing={3}>
-                <DisplayTotals/>
+                <DisplayTotals language={language} setLanguage ={setLanguage}/>
             </Grid>
 
 
-            <Typography variant="h2" color="textSecondary" align="left" gutterBottom> Player Averages </Typography>
+            <Typography variant="h2" color="textSecondary" align="left" gutterBottom> {language ==="english"?"Player Averages":"Moyennes des joueurs"} </Typography>
             <Grid container spacing={3}>
-                <DisplayAverages/>
+                <DisplayAverages language={language} setLanguage ={setLanguage}/>
             </Grid>
 
-            <Typography variant="h2" color="textSecondary" align="left" gutterBottom> NBA Team Averages </Typography>
+            <Typography variant="h2" color="textSecondary" align="left" gutterBottom> {language ==="english"?"NBA Team Averages":"Moyennes des équipes de la NBA"} </Typography>
             <Grid container spacing={3}>
                 <Grid item>
                     <Card>
@@ -76,7 +79,7 @@ function Team() {
 
                         <CardContent>
                             <Typography variant="h3">24.3</Typography>
-                            <Typography color="textSecondary" variant="h4"> Assists</Typography>
+                            <Typography color="textSecondary" variant="h4"> {language ==="english"?"Assists":"Passes décisives"}</Typography>
                         </CardContent>
                     </Card>
                 </Grid>
@@ -85,7 +88,7 @@ function Team() {
                     <Card>
                         <CardContent>
                             <Typography variant="h3">44.9</Typography>
-                            <Typography color="textSecondary" variant="h4"> Rebounds</Typography>
+                            <Typography color="textSecondary" variant="h4"> {language ==="english"?"Rebounds":"Rebondit"}</Typography>
                         </CardContent>
                     </Card>
                 </Grid>
@@ -96,15 +99,13 @@ function Team() {
                     <Button style={{
                         height: '80px',
                         width: '300px',
-
-                    }} variant="contained" color="default" onClick={() => changeToPlayers()}>Back</Button>
+                    }} variant="contained" color="default" onClick={() => changeToPlayers()}>{language ==="english"?"Back": "Retour" }</Button>
                 </Grid>
                 <Grid item>
                     <Button style={{
                         height: '80px',
-                        width: '300px',
-
-                    }} variant="contained" color="default" onClick={() => changeToHome()}>Home</Button>
+                        width: '300px'
+                    }} variant="contained" color="default" onClick={() => changeToHome()}>{language ==="english"?"Back to Home": "Retour à la page d'accueil" }</Button>
 
                 </Grid>
 
@@ -113,13 +114,13 @@ function Team() {
             <br/>
 
 
-            <BottomBar budget={budget}/>
+            <BottomBar budget={budget} language={language} setLanguage={setLanguage}/>
         </Fragment>
 
     );
 }
 
-function DisplayPlayers() {
+function DisplayPlayers({language, setLanguage}) {
     for (var key in playerData) {
         if (playerData.hasOwnProperty(key)) {
             if (playerData[key].selected) {
@@ -170,7 +171,7 @@ function DisplayPlayers() {
 
 }
 
-function DisplayTotals() {
+function DisplayTotals({language, setLanguage}) {
     let totalPoints = 0.0;
     let totalAssists = 0.0;
     let totalRebounds = 0.0;
@@ -197,7 +198,7 @@ function DisplayTotals() {
 
                     <CardContent>
                         <Typography variant="h3">{Number(totalAssists).toFixed(1).toString()}</Typography>
-                        <Typography color="textSecondary" variant="h4"> Assists</Typography>
+                        <Typography color="textSecondary" variant="h4"> {language ==="english"?"Assists":"Passes décisives"}</Typography>
                     </CardContent>
                 </Card>
             </Grid>
@@ -206,7 +207,7 @@ function DisplayTotals() {
                 <Card>
                     <CardContent>
                         <Typography variant="h3">{Number(totalRebounds).toFixed(1).toString()}</Typography>
-                        <Typography color="textSecondary" variant="h4"> Rebounds</Typography>
+                        <Typography color="textSecondary" variant="h4"> {language ==="english"?"Rebounds":"Rebondit"}</Typography>
                     </CardContent>
                 </Card>
             </Grid>
@@ -217,7 +218,7 @@ function DisplayTotals() {
 
 }
 
-function DisplayAverages() {
+function DisplayAverages({language, setLanguage}) {
     let totalPoints = 0.0;
     let totalAssists = 0.0;
     let totalRebounds = 0.0;
@@ -253,7 +254,7 @@ function DisplayAverages() {
 
                     <CardContent>
                         <Typography variant="h3">{Number(averageAssists).toFixed(1).toString()}</Typography>
-                        <Typography color="textSecondary" variant="h4"> Assists</Typography>
+                        <Typography color="textSecondary" variant="h4"> {language ==="english"?"Assists":"Passes décisives"}</Typography>
                     </CardContent>
                 </Card>
             </Grid>
@@ -262,7 +263,7 @@ function DisplayAverages() {
                 <Card>
                     <CardContent>
                         <Typography variant="h3">{Number(averageRebounds).toFixed(1).toString()}</Typography>
-                        <Typography color="textSecondary" variant="h4"> Rebounds</Typography>
+                        <Typography color="textSecondary" variant="h4"> {language ==="english"?"Rebounds":"Rebondit"}</Typography>
                     </CardContent>
                 </Card>
             </Grid>

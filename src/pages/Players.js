@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import {AppBar, Toolbar, IconButton, Button, Grid} from '@material-ui/core';
@@ -22,25 +22,28 @@ import * as reactDOM from "react-dom";
 import {width} from "@material-ui/system";
 
 function Players() {
+
     const history = useHistory();
     if (history.location.state === undefined) {
         return <NothingHere/>
     }
 
-    const [language, setLanguage] = useState(teamData.language);
+    const [language, setLanguage] = useState(history.location.state.language);
 
 
 
     const [budget, setBudget] = useState(history.location.state.budget)
     function changeToHome() {
         history.push("/",
-            {budget: budget}
+            {budget: budget,
+            language:language}
         )
     }
 
     function changeToTeam() {
         history.push("/team",
-            {budget: budget}
+            {budget: budget,
+            language:language}
         )
     }
 
@@ -111,6 +114,7 @@ function Players() {
         }
         toggleAlert(false);
     }
+
     return (
 
         <Fragment>
@@ -122,7 +126,7 @@ function Players() {
                 </Alert>
             </Snackbar>
             <br/>
-            <Typography  variant="h3" color="textSecondary" align="left" gutterBottom> {language === true ? "Point guards" : "menuer"} </Typography>
+            <Typography  variant="h3" color="textSecondary" align="left" gutterBottom> {language === "english" ? "Point guards" : "Menuer"} </Typography>
             <Grid container justify="flex-start" spacing={3}>
                 <Grid item>
                     <Card>
@@ -250,7 +254,7 @@ function Players() {
                 </Grid>
             </Grid>
             <br/>
-            <Typography variant="h3" color="textSecondary" align="left" gutterBottom> Shooting Guards </Typography>
+            <Typography variant="h3" color="textSecondary" align="left" gutterBottom> {language === "english"?"Shooting Guards": "Arrière"} </Typography>
             <Grid container justify="flex-start" spacing={3}>
                 <Grid item>
                     <Card>
@@ -379,7 +383,7 @@ function Players() {
             </Grid>
 
             <br/>
-            <Typography variant="h3" color="textSecondary" align="left" gutterBottom> Small Forwards </Typography>
+            <Typography variant="h3" color="textSecondary" align="left" gutterBottom> {language === "english" ?"Small Forwards":" Ailier"} </Typography>
 
             <Grid container justify="flex-start" spacing={3}>
                 <Grid item>
@@ -506,7 +510,7 @@ function Players() {
                 </Grid>
             </Grid>
             <br/>
-            <Typography variant="h3" color="textSecondary" align="left" gutterBottom> Power Fowards </Typography>
+            <Typography variant="h3" color="textSecondary" align="left" gutterBottom> {language === "english"?"Power Fowards": "Ailier fort"} </Typography>
             <Grid container justify="flex-start" spacing={3}>
                 <Grid item>
                     <Card>
@@ -630,7 +634,7 @@ function Players() {
                 </Grid>
             </Grid>
             <br/>
-            <Typography variant="h3" color="textSecondary" align="left" gutterBottom> Centers </Typography>
+            <Typography variant="h3" color="textSecondary" align="left" gutterBottom> {language ==="english"? "Centers":"Pivot"} </Typography>
             <Grid container justify="flex-start" spacing={3}>
                 <Grid item>
                     <Card>
@@ -752,6 +756,7 @@ function Players() {
 
                     </Card>
                 </Grid>
+
             </Grid>
 
             <Grid container justify="center" spacing={3}>
@@ -760,14 +765,14 @@ function Players() {
                         height: '80px',
                         width: '300px',
 
-                    }} variant="contained" color="default" onClick={() => changeToHome()}>Back</Button>
+                    }} variant="contained" color="default" onClick={() => changeToHome()}>{language ==="english"?"Back": "Retour" }</Button>
                 </Grid>
                 <Grid item>
                     <Button style={{
                         height: '80px',
                         width: '300px',
 
-                    }} variant="contained" color="default" onClick={() => changeToTeam()}>View Team</Button>
+                    }} variant="contained" color="default" onClick={() => changeToTeam()}>{language ==="english"?"View Team": "Voir l'équipe" }</Button>
 
                 </Grid>
 
