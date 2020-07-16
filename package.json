@@ -5,9 +5,9 @@
   "description": "",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "build": "parcel build index.html --public-url '.'",
+    "predeploy": "rm -rf dist && parcel build index.html --public-url '.'",
+    "deploy": "gh-pages -d dist"
   },
   "license": "MIT",
   "dependencies": {
@@ -20,7 +20,8 @@
     "react-dom": "^16.13.1",
     "react-player": "^2.5.0",
     "react-router": "^5.2.0",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "terser": "^4.8.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.5",
