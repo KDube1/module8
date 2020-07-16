@@ -10,7 +10,7 @@ import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
 ReactDOM.render(
     <Router>
         <Switch>
-            <Route exact path="module8/">
+            <Route exact path="/">
                 <Home/>
             </Route>
             <Route exact path="/players">
