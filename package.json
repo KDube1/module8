@@ -1,10 +1,13 @@
 {
   "name": "module8",
+  "homepage": "https://kdube1.github.io/module8/",
   "version": "0.1.0",
   "description": "",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "license": "MIT",
   "dependencies": {
@@ -22,6 +25,7 @@
   "devDependencies": {
     "@babel/core": "^7.10.5",
     "babel-preset-nano-react-app": "^0.1.0",
+    "gh-pages": "^3.1.0",
     "parcel": "^1.12.4"
   },
   "babel": {
